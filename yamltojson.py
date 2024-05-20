@@ -94,7 +94,7 @@ def load(loader: Callable, filepath: str = "", from_stdin: bool = False) -> Dict
         data = loader(input_str)
     else:
         with open(filepath, "r") as f:
-            data = load(f)
+            data = loader(f)
 
     return data
 
@@ -118,7 +118,6 @@ def main() -> None:
         color_lexer = YamlLexer()
 
     data = load(loader, filepath=args.file, from_stdin=from_stdin)
-
     if args.path:
         data = parse_path(args.path, data)
 
